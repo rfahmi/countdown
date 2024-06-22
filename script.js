@@ -19,7 +19,7 @@ function updateCountdown() {
         millisecondsLeft -= 1;
     }
 
-    setTimeout(updateCountdown, 1);
+    requestAnimationFrame(updateCountdown);
 }
 
 updateCountdown();
