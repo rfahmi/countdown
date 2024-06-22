@@ -4,20 +4,22 @@ const countdownElement = document.getElementById("countdown-time");
 function updateCountdown() {
     const now = new Date();
     const diff = targetDate.getTime() - now.getTime();
-    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-    const milliseconds = Math.floor(diff % 1000);
+    const milliseconds = Math.floor(diff);
 
-    const timeString = `${days.toString().padStart(2, "0")}:${hours.toString().padStart(2, "0")}:${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}:${milliseconds.toString().padStart(3, "0")}`;
+    const days = Math.floor(milliseconds / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((milliseconds % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((milliseconds % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((milliseconds % (1000 * 60)) / 1000);
+    const millisecondsLeft = milliseconds % 1000;
+
+    const timeString = `${days.toString().padStart(2, "0")}:${hours.toString().padStart(2, "0")}:${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}.${millisecondsLeft.toString().padStart(3, "0")}`;
     countdownElement.textContent = timeString;
 
     if (diff <= 0) {
         countdownElement.textContent = "Countdown Over!";
     }
 
-    setTimeout(updateCountdown, 1000);
+    setTimeout(updateCountdown, 1);
 }
 
 updateCountdown();
